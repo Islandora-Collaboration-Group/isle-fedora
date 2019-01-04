@@ -80,19 +80,13 @@ RUN cd /tmp/ && \
     mvn package -Dfedora.version=3.8.1 && \
     cd /tmp/trippi-sail/trippi-sail-blazegraph-remote/target && \
     tar xf trippi-sail-blazegraph-remote-0.0.1-SNAPSHOT-bin.tar.gz && \
-    mv trippi-sail-blazegraph-remote-0.0.1-SNAPSHOT /opt/trippi-sail && \
-    chown -R tomcat:tomcat /opt/trippi-sail && \
-    $CATALINA_HOME/bin/shutdown.sh && \
-    ## Docker Hub Auto-builds need some time.
-    sleep 90 && \
-    sed -i '3i\ <Loader className="org.apache.catalina.loader.VirtualWebappLoader" virtualClasspath="/opt/trippi-sail/*.jar" searchVirtualFirst="true"/>' $CATALINA_HOME/conf/Catalina/localhost/fedora.xml && \
-    sed -i 's#localhost:8080#blazegraph:8084#g' /tmp/trippi-sail/trippi-sail-blazegraph-remote/src/main/resources/sample-bean-config-xml/remote-blazegraph.xml && \
+    cp -r trippi-sail-blazegraph-remote-0.0.1-SNAPSHOT/* $CATALINA_HOME/webapps/fedora/WEB-INF/lib/ && \
+    sed -i 's#localhost:8080#isle-blazegraph:8080#g' /tmp/trippi-sail/trippi-sail-blazegraph-remote/src/main/resources/sample-bean-config-xml/remote-blazegraph.xml && \
     # 15 spaces after \ for proper formatting.
     sed -i '34i\                <constructor-arg type="boolean" value="false"/>' /tmp/trippi-sail/trippi-sail-blazegraph-remote/src/main/resources/sample-bean-config-xml/remote-blazegraph.xml && \
     sed -i 's#SesameSession">#SesameSession" scope="prototype" >#g' /tmp/trippi-sail/trippi-sail-blazegraph-remote/src/main/resources/sample-bean-config-xml/remote-blazegraph.xml && \
     sed -i 's#value="test#value="fedora#g' /tmp/trippi-sail/trippi-sail-blazegraph-remote/src/main/resources/sample-bean-config-xml/remote-blazegraph.xml && \
     cp /tmp/trippi-sail/trippi-sail-blazegraph-remote/src/main/resources/sample-bean-config-xml/remote-blazegraph.xml $FEDORA_HOME/server/config/spring/ && \
-    sed -i 's#classes:#classes:/opt/trippi-sail/*:#g' $FEDORA_HOME/server/bin/env-server.sh && \
     chown -R tomcat:tomcat $FEDORA_HOME/ && \
     rm -rf /tmp/* /var/tmp/*
 
