@@ -86,7 +86,7 @@ RUN cd /tmp/ && \
     sed -i '34i\                <constructor-arg type="boolean" value="false"/>' /tmp/trippi-sail/trippi-sail-blazegraph-remote/src/main/resources/sample-bean-config-xml/remote-blazegraph.xml && \
     sed -i 's#SesameSession">#SesameSession" scope="prototype" >#g' /tmp/trippi-sail/trippi-sail-blazegraph-remote/src/main/resources/sample-bean-config-xml/remote-blazegraph.xml && \
     sed -i 's#value="test#value="fedora#g' /tmp/trippi-sail/trippi-sail-blazegraph-remote/src/main/resources/sample-bean-config-xml/remote-blazegraph.xml && \
-    cp /tmp/trippi-sail/trippi-sail-blazegraph-remote/src/main/resources/sample-bean-config-xml/remote-blazegraph.xml $FEDORA_HOME/server/config/spring/ && \
+    cp /tmp/trippi-sail/trippi-sail-blazegraph-remote/src/main/resources/sample-bean-config-xml/remote-blazegraph.xml $FEDORA_HOME/server/config/spring/remote-blazegraph.bk && \
     chown -R tomcat:tomcat $FEDORA_HOME/ && \
     rm -rf /tmp/* /var/tmp/*
 
