@@ -50,7 +50,7 @@ RUN mkdir -p $FEDORA_HOME /tmp/fedora &&\
     rm permit-upload-to-anonymous-user.xml && \
     # Drupal Filter
     cd $CATALINA_HOME/webapps/fedora/WEB-INF/lib/ && \
-    curl -O -L "https://github.com/Islandora/islandora_drupal_filter/releases/download/v7.1.9/fcrepo-drupalauthfilter-3.8.1.jar" && \
+    curl -O -L "https://github.com/Islandora/islandora_drupal_filter/releases/download/v7.1.12/fcrepo-drupalauthfilter-3.8.1.jar" && \
     ## Cleanup phase.
     rm -rf /tmp/* /var/tmp/*
 
@@ -59,8 +59,8 @@ ARG MAVEN_MAJOR
 ARG MAVEN_VERSION
 ARG ANT_VERSION
 ENV MAVEN_MAJOR=${MAVEN_MAJOR:-3} \
-    MAVEN_VERSION=${MAVEN_VERSION:-3.5.4} \
-    ANT_VERSION=${ANT_VERSION:-1.10.5}
+    MAVEN_VERSION=${MAVEN_VERSION:-3.6.0} \
+    ANT_VERSION=${ANT_VERSION:-1.9.14}
 
 RUN mkdir -p $ANT_HOME $MAVEN_HOME && \
     cd /tmp && \
