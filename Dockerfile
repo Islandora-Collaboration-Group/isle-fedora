@@ -50,7 +50,7 @@ RUN mkdir -p $FEDORA_HOME /tmp/fedora &&\
     rm permit-upload-to-anonymous-user.xml && \
     # Drupal Filter
     cd $CATALINA_HOME/webapps/fedora/WEB-INF/lib/ && \
-    curl -O -L "https://github.com/Islandora/islandora_drupal_filter/releases/download/v7.1.12/fcrepo-drupalauthfilter-3.8.1.jar" && \
+    curl -O -L "https://github.com/Islandora/islandora_drupal_filter/releases/download/7.1.12/fcrepo-drupalauthfilter-3.8.1.jar" && \
     ## Cleanup phase.
     rm -rf /tmp/* /var/tmp/*
 
