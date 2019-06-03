@@ -9,23 +9,23 @@
     </layout>
   </appender>
   <logger name="dk.defxws.fedoragsearch" additivity="false">
-    <level value="WARN" />
+    <level value="{{getv "/gsearch/dk/defxws/fedoragsearch/log"}}" />
     <appender-ref ref="STDOUT"/>
   </logger>
   <logger name="dk.defxws.fgszebra" additivity="false">
-    <level value="WARN" />
+    <level value="{{getv "/gsearch/dk/defxws/fgszebra/log"}}" />
     <appender-ref ref="STDOUT"/>
   </logger>
   <logger name="dk.defxws.fgslucene" additivity="false">
-    <level value="WARN" />
+    <level value="{{getv "/gsearch/dk/defxws/fgslucene/log"}}" />
     <appender-ref ref="STDOUT"/>
   </logger>
   <logger name="dk.defxws.fgssolr" additivity="false">
-    <level value="WARN" />
+    <level value="{{getv "/gsearch/dk/defxws/fgssolr/log"}}" />
     <appender-ref ref="STDOUT"/>
   </logger>
   <root>
-    <level value="WARN" />
+    <level value="{{getv "/gsearch/root/log"}}" />
     <appender-ref ref="STDOUT"/>
   </root>
 </log4j:configuration>
