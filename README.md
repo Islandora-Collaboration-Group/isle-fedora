@@ -1,7 +1,7 @@
 # ISLE Fedora
 
 Based on:  
- - [Tomcat 8.5.31](https://hub.docker.com/r/benjaminrosner/isle-tomcat/)
+ - [ISLE-Tomcat](https://github.com/Islandora-Collaboration-Group/isle-tomcat)
  - Fedora Repository 3.8.1
  - @todo: complete me
 
