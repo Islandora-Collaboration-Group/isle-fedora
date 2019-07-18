@@ -1,6 +1,7 @@
 # ISLE Fedora
 
 ## Part of the ISLE Islandora 7.x Docker Images
+Designed as the Fedora Repository for ISLE.
 
 Based on:  
  - [ISLE-Tomcat](https://github.com/Islandora-Collaboration-Group/isle-tomcat)
