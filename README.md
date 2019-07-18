@@ -8,7 +8,7 @@ Based on:
 
 Contains and Includes:
  - [Fedora Repository 3.8.1](https://duraspace.org/fedora/)
- - [Gsearch `2.9`](https://github.com/discoverygarden/gsearch.git) (_DGI fork_)
+ - [Gsearch 2.9](https://github.com/discoverygarden/gsearch.git) (_DGI fork_)
  - [Maven 3.6.0](https://maven.apache.org/)
  - [Ant 1.9.14](https://ant.apache.org/)
  - [DGI basic-solr-config 4.10.x branch](https://github.com/discoverygarden/basic-solr-config/tree/4.10.x)
