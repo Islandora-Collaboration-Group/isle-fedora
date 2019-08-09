@@ -1,6 +1,6 @@
-FROM islandoracollabgroup/isle-tomcat:1.1.2
+FROM islandoracollabgroup/isle-tomcat:1.2.0
 
-## Dependencies 
+## Dependencies
 RUN GEN_DEP_PACKS="mysql-client \
     python-mysqldb \
     default-libmysqlclient-dev \
@@ -59,8 +59,8 @@ ARG MAVEN_MAJOR
 ARG MAVEN_VERSION
 ARG ANT_VERSION
 ENV MAVEN_MAJOR=${MAVEN_MAJOR:-3} \
-    MAVEN_VERSION=${MAVEN_VERSION:-3.6.0} \
-    ANT_VERSION=${ANT_VERSION:-1.9.14}
+    MAVEN_VERSION=${MAVEN_VERSION:-3.6.1} \
+    ANT_VERSION=${ANT_VERSION:-1.10.6}
 
 RUN mkdir -p $ANT_HOME $MAVEN_HOME && \
     cd /tmp && \

@@ -6,5 +6,5 @@ gid = 1000
 mode = "0740"
 keys = [
   "/fedora/gsearch/user",
-  "/fedora/gsearch/pass",
+  "/fedora/gsearch/pass"
 ]

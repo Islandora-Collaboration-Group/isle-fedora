@@ -1,15 +1,22 @@
 # ISLE Fedora
 
+## Part of the ISLE Islandora 7.x Docker Images
+Designed as the Fedora Repository for ISLE.
+
 Based on:  
  - [ISLE-Tomcat](https://github.com/Islandora-Collaboration-Group/isle-tomcat)
- - Fedora Repository 3.8.1
- - @todo: complete me
 
-# Generic Usage
+Contains and Includes:
+ - [Fedora Repository 3.8.1](https://duraspace.org/fedora/)
+ - [Gsearch 2.9](https://github.com/discoverygarden/gsearch.git) (_DGI fork_)
+ - [Maven 3.6.1](https://maven.apache.org/)
+ - [Ant 1.10.6](https://ant.apache.org/)
+ - [DGI basic-solr-config 4.10.x branch](https://github.com/discoverygarden/basic-solr-config/tree/4.10.x)
+ - [DGI gsearch Extensions 0.1.3](https://github.com/discoverygarden/dgi_gsearch_extensions.git)
 
- - @todo complete me
+## Important Paths
+  - $FEDORA_HOME is `/usr/local/fedora`
 
-## Tomcat users
+### Usage
 
-admin:isle_admin  
-manager:isle_manager  
+* For general usage of this image and [ISLE](https://github.com/Islandora-Collaboration-Group/ISLE), please refer to [ISLE documentation](https://islandora-collaboration-group.github.io/ISLE/)
