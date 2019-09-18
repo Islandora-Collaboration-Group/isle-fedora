@@ -1,4 +1,4 @@
-FROM islandoracollabgroup/isle-tomcat:1.2.0
+FROM borndigital/isle-tomcat:1.3.0-dev
 
 ## Dependencies
 RUN GEN_DEP_PACKS="mysql-client \
@@ -21,7 +21,11 @@ ENV JAVA_MAX_MEM=${JAVA_MAX_MEM:-2G} \
     FEDORA_PATH=$PATH:/usr/local/fedora/server/bin:/usr/local/fedora/client/bin \
     PATH=$PATH:/usr/local/fedora/server/bin:/usr/local/fedora/client/bin:/opt/maven/bin:/opt/ant/bin \
     MAVEN_HOME=/opt/maven \
-    ANT_HOME=/opt/ant
+    ANT_HOME=/opt/ant \
+    MAVEN_MAJOR=${MAVEN_MAJOR:-3} \
+    MAVEN_VERSION=${MAVEN_VERSION:-3.6.2} \
+    ANT_VERSION=${ANT_VERSION:-1.10.7}
+
 
 ## Copy installation configuration files.
 COPY install_properties/ /
@@ -58,9 +62,6 @@ RUN mkdir -p $FEDORA_HOME /tmp/fedora &&\
 ARG MAVEN_MAJOR
 ARG MAVEN_VERSION
 ARG ANT_VERSION
-ENV MAVEN_MAJOR=${MAVEN_MAJOR:-3} \
-    MAVEN_VERSION=${MAVEN_VERSION:-3.6.1} \
-    ANT_VERSION=${ANT_VERSION:-1.10.6}
 
 RUN mkdir -p $ANT_HOME $MAVEN_HOME && \
     cd /tmp && \
@@ -72,6 +73,23 @@ RUN mkdir -p $ANT_HOME $MAVEN_HOME && \
     ant -f fetch.xml -Ddest=system && \
     ## Cleanup phase.
     rm -rf /tmp/* /var/tmp/* $ANT_HOME/bin/*.bat 
+
+## Trippi-Sail Adapter for Blazegraph
+RUN cd /tmp/ && \
+    git clone https://github.com/discoverygarden/trippi-sail.git && \
+    cd /tmp/trippi-sail && \
+    mvn package -Dfedora.version=3.8.1 && \
+    cd /tmp/trippi-sail/trippi-sail-blazegraph-remote/target && \
+    tar xf trippi-sail-blazegraph-remote-0.0.1-SNAPSHOT-bin.tar.gz && \
+    cp -r trippi-sail-blazegraph-remote-0.0.1-SNAPSHOT/* $CATALINA_HOME/webapps/fedora/WEB-INF/lib/ && \
+    sed -i 's#localhost:8080#isle-blazegraph:8080#g' /tmp/trippi-sail/trippi-sail-blazegraph-remote/src/main/resources/sample-bean-config-xml/remote-blazegraph.xml && \
+    # 15 spaces after \ for proper formatting.
+    sed -i '34i\                <constructor-arg type="boolean" value="false"/>' /tmp/trippi-sail/trippi-sail-blazegraph-remote/src/main/resources/sample-bean-config-xml/remote-blazegraph.xml && \
+    sed -i 's#SesameSession">#SesameSession" scope="prototype" >#g' /tmp/trippi-sail/trippi-sail-blazegraph-remote/src/main/resources/sample-bean-config-xml/remote-blazegraph.xml && \
+    sed -i 's#value="test#value="fedora#g' /tmp/trippi-sail/trippi-sail-blazegraph-remote/src/main/resources/sample-bean-config-xml/remote-blazegraph.xml && \
+    cp /tmp/trippi-sail/trippi-sail-blazegraph-remote/src/main/resources/sample-bean-config-xml/remote-blazegraph.xml $FEDORA_HOME/server/config/spring/remote-blazegraph.bk && \
+    chown -R tomcat:tomcat $FEDORA_HOME/ && \
+    rm -rf /tmp/* /var/tmp/*
 
 ###
 # Fedora GSearch
