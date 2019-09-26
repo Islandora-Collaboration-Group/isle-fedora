@@ -399,11 +399,13 @@ https://wiki.duraspace.org/display/FEDORA36/Spring+Security
             WARNING: changing the level (except to 0) requires 
             running the Resource Index Rebuilder.</comment>
     </param>
-    <param name="datastore" value="localMulgaraTriplestore">
-      <comment>(required) 
-            Name of the triplestore to use. WARNING: changing the 
-            triplestore running the Resource Index Rebuilder.</comment>
-    </param>
+    <!-- Using .env (line 98) confd "toggle" to set the Fedora Resource index using either the default Mulgara or the remote Blazegraph container --> 
+    {{if eq (getv "/fedora/resource/index") "blazegraph"}}
+    <!--<param name="datastore" value="localMulgaraTriplestore"><comment>(required)Name of the triplestore to use. WARNING: changing the triplestore running the Resource Index Rebuilder.</comment></param>-->
+    {{ end }}
+    {{if eq (getv "/fedora/resource/index") "mulgara"}}
+    <param name="datastore" value="localMulgaraTriplestore"><comment>(required)Name of the triplestore to use. WARNING: changing the triplestore running the Resource Index Rebuilder.</comment></param>
+    {{ end }}
   </module>
   <module role="org.fcrepo.oai.OAIProvider" class="org.fcrepo.server.oai.FedoraOAIProviderModule">
     <comment>Description: Exposes the repository for OAI harvesters.</comment>
@@ -838,6 +840,7 @@ https://wiki.duraspace.org/display/FEDORA36/Spring+Security
       <comment>The maximum number of active instances in pool.</comment>
     </param>
   </datastore>
+
   <datastore id="localMulgaraTriplestore">
     <comment>local Mulgara Triplestore used by the Resource Index</comment>
     <param name="autoFlushDormantSeconds" value="5">

@@ -6,3 +6,7 @@ while ! mysqladmin ping -hmysql --silent; do
 done
 
 /usr/local/bin/confd -onetime -backend env
+
+if [ $FEDORA_RESOURCE_INDEX = "blazegraph" ]; then
+   mv /usr/local/fedora/server/config/spring/remote-blazegraph.bk /usr/local/fedora/server/config/spring/remote-blazegraph.xml
+fi

@@ -7,5 +7,6 @@ mode = "0740"
 keys = [
   "/fedora/db",
   "/fedora/db/user",
-  "/fedora/db/pass"
+  "/fedora/db/pass",
+  "/fedora/resource/index"
 ]
