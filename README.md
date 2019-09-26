@@ -19,5 +19,5 @@ Contains and Includes:
   - $FEDORA_HOME is `/usr/local/fedora`
 
 ### Usage
-- This version of the Fedora Image works in conjunction with the [isle-blazegraph](https://github.com/Islandora-Collaboration-Group/isle-blazegraph) image.
+- This version of the Fedora Image works in conjunction with the optional component [isle-blazegraph](https://github.com/Islandora-Collaboration-Group/isle-blazegraph) image.
 * For general usage of this image and [ISLE](https://github.com/Islandora-Collaboration-Group/ISLE), please refer to [ISLE documentation](https://islandora-collaboration-group.github.io/ISLE/)
