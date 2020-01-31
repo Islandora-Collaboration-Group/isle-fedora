@@ -1,4 +1,4 @@
-FROM islandoracollabgroup/isle-tomcat:1.4.0
+FROM islandoracollabgroup/isle-tomcat:1.4.1
 
 ## Dependencies
 RUN GEN_DEP_PACKS="mysql-client \
@@ -13,7 +13,8 @@ RUN GEN_DEP_PACKS="mysql-client \
     apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-## Set up environmental variables for tomcat & dependencies installation
+## Set up environmental variables for Tomcat & dependencies installation
+# @see: Apache Maven http://maven.apache.org/download.cgi & Apache Ant https://ant.apache.org/
 ENV JAVA_MAX_MEM=${JAVA_MAX_MEM:-2G} \
     JAVA_MIN_MEM=${JAVA_MIN_MEM:-512M} \
     JAVA_OPTS='-Djava.awt.headless=true -server -Xmx${JAVA_MAX_MEM} -Xms${JAVA_MIN_MEM} -XX:+UseG1GC -XX:+UseStringDeduplication -XX:MaxGCPauseMillis=200 -XX:InitiatingHeapOccupancyPercent=70 -Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses=true' \
@@ -23,7 +24,7 @@ ENV JAVA_MAX_MEM=${JAVA_MAX_MEM:-2G} \
     MAVEN_HOME=/opt/maven \
     ANT_HOME=/opt/ant \
     MAVEN_MAJOR=${MAVEN_MAJOR:-3} \
-    MAVEN_VERSION=${MAVEN_VERSION:-3.6.2} \
+    MAVEN_VERSION=${MAVEN_VERSION:-3.6.3} \
     ANT_VERSION=${ANT_VERSION:-1.10.7}
 
 
@@ -31,6 +32,7 @@ ENV JAVA_MAX_MEM=${JAVA_MAX_MEM:-2G} \
 COPY install_properties/ /
 
 ## Fedora Installation with Drupalfilter
+# @see: Fedora https://github.com/fcrepo3/fcrepo/releases & Drupal-filter https://github.com/Islandora/islandora_drupal_filter/releases
 RUN mkdir -p $FEDORA_HOME /tmp/fedora &&\
     cd /tmp/fedora && \
     curl -O -L "https://github.com/fcrepo3/fcrepo/releases/download/v3.8.1/fcrepo-installer-3.8.1.jar" && \
@@ -58,7 +60,7 @@ RUN mkdir -p $FEDORA_HOME /tmp/fedora &&\
     ## Cleanup phase.
     rm -rf /tmp/* /var/tmp/*
 
-## ANT AND MAVEN
+## ANT AND MAVEN ENV
 ARG MAVEN_MAJOR
 ARG MAVEN_VERSION
 ARG ANT_VERSION
@@ -75,6 +77,7 @@ RUN mkdir -p $ANT_HOME $MAVEN_HOME && \
     rm -rf /tmp/* /var/tmp/* $ANT_HOME/bin/*.bat 
 
 ## Trippi-Sail Adapter for Blazegraph
+# @see: https://github.com/discoverygarden/trippi-sail/releases
 RUN cd /tmp/ && \
     git clone https://github.com/discoverygarden/trippi-sail.git && \
     cd /tmp/trippi-sail && \
@@ -91,10 +94,8 @@ RUN cd /tmp/ && \
     chown -R tomcat:tomcat $FEDORA_HOME/ && \
     rm -rf /tmp/* /var/tmp/*
 
-###
-# Fedora GSearch
-# DGI GSearch extensions
-##
+## Fedora GSearch
+# @see: Gsearch https://github.com/discoverygarden/gsearch/releases & DGI GSearch extensions https://github.com/discoverygarden/dgi_gsearch_extensions/releases
 RUN mkdir /tmp/fedoragsearch && \
     cd /tmp/fedoragsearch && \
     git clone https://github.com/discoverygarden/gsearch.git && \
@@ -111,7 +112,9 @@ RUN mkdir /tmp/fedoragsearch && \
     ## Cleanup phase.
     rm -rf /tmp/* /var/tmp/*
 
-    ## Configuration time. Why in another layer? caching during development.
+## Gsearch / Solr configuration
+# Note from Ben: Why in another layer? caching during development.
+# @see: https://github.com/discoverygarden/basic-solr-config/tree/4.10.x is the branch to review for changes.
 RUN cd /tmp && \
     git clone --recursive -b 4.10.x https://github.com/discoverygarden/basic-solr-config.git && \
     cd basic-solr-config && \
