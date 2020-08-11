@@ -1,5 +1,4 @@
-FROM islandoracollabgroup/isle-tomcat:1.5.0
-
+FROM islandoracollabgroup/isle-tomcat:1.5.1
 
 ## Dependencies
 RUN GEN_DEP_PACKS="mysql-client \
@@ -26,7 +25,7 @@ ENV JAVA_MAX_MEM=${JAVA_MAX_MEM:-2G} \
     ANT_HOME=/opt/ant \
     MAVEN_MAJOR=${MAVEN_MAJOR:-3} \
     MAVEN_VERSION=${MAVEN_VERSION:-3.6.3} \
-    ANT_VERSION=${ANT_VERSION:-1.10.7}
+    ANT_VERSION=${ANT_VERSION:-1.10.8}
 
 
 ## Copy installation configuration files.
