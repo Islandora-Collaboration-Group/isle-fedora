@@ -1,8 +1,7 @@
-FROM islandoracollabgroup/isle-tomcat:1.5.2
+FROM islandoracollabgroup/isle-tomcat:1.5.3
 
 ## Dependencies
 RUN GEN_DEP_PACKS="mysql-client \
-    python-mysqldb \
     default-libmysqlclient-dev \
     openssl \
     libxml2-dev" && \
@@ -25,7 +24,7 @@ ENV JAVA_MAX_MEM=${JAVA_MAX_MEM:-2G} \
     ANT_HOME=/opt/ant \
     MAVEN_MAJOR=${MAVEN_MAJOR:-3} \
     MAVEN_VERSION=${MAVEN_VERSION:-3.6.3} \
-    ANT_VERSION=${ANT_VERSION:-1.10.8}
+    ANT_VERSION=${ANT_VERSION:-1.10.9}
 
 
 ## Copy installation configuration files.
