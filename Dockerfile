@@ -1,4 +1,4 @@
-FROM islandoracollabgroup/isle-tomcat:1.5.3
+FROM islandoracollabgroup/isle-tomcat:1.5.4
 
 ## Dependencies
 RUN GEN_DEP_PACKS="mysql-client \
@@ -131,6 +131,9 @@ RUN cd /tmp && \
     ## Link helper scripts.
     ln -s /utility_scripts/rebuildFedora.sh /usr/local/bin/rebuildFedora && \
     ln -s /utility_scripts/updateSolrIndex.sh /usr/local/bin/updateSolrIndex && \
+    ## Permissions fix for link help script
+    chmod 755 /usr/local/tomcat/webapps/fedoragsearch/client && \
+    chmod -Rv 740 /usr/local/tomcat/webapps/fedoragsearch/client/* && \
     ## Cleanup phase.
     rm -rf /tmp/* /var/tmp/* $CATALINA_HOME/webapps/fedora-demo* $CATALINA_HOME/webapps/fedoragsearch/WEB-INF/classes/configDemo*
 
