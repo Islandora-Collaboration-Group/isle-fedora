@@ -124,7 +124,7 @@ RUN cd /tmp && \
     sed -i 's#/usr/local/fedora/tomcat#/usr/local/tomcat#g' foxmlToSolr.xslt && \
     sed -i 's#/usr/local/fedora/tomcat#/usr/local/tomcat#g' islandora_transforms/*.xslt && \
     cd $CATALINA_HOME/webapps/fedoragsearch/FgsConfig && \
-    ant -f fgsconfig-basic.xml -Dlocal.FEDORA_HOME=$FEDORA_HOME -DgsearchUser=fgsAdmin -DgsearchPass=demo_fgs_admin -DfinalConfigPath=$CATALINA_HOME/webapps/fedoragsearch/WEB-INF/classes -DlogFilePath=$FEDORA_HOME/logs -DfedoraUser=fedoraAdmin -DfedoraPass=demo_fed_admin -DobjectStoreBase=$FEDORA_HOME/data/objectStore -DindexDir=NOT_USED -DindexingDocXslt=foxmlToSolr -DlogLevel=INFO -propertyfile fgsconfig-basic-for-islandora.properties && \
+    ant -f fgsconfig-basic.xml -Dlocal.FEDORA_HOME=$FEDORA_HOME -DgsearchUser=fgsAdmin -DgsearchPass=ild_fgs_admin_2018 -DfinalConfigPath=$CATALINA_HOME/webapps/fedoragsearch/WEB-INF/classes -DlogFilePath=$FEDORA_HOME/logs -DfedoraUser=fedoraAdmin -DfedoraPass=ild_fed_admin_2018 -DobjectStoreBase=$FEDORA_HOME/data/objectStore -DindexDir=NOT_USED -DindexingDocXslt=foxmlToSolr -DlogLevel=INFO -propertyfile fgsconfig-basic-for-islandora.properties && \
     sed -i "s#FgsUpdaters#FgsUpdater0  FgsUpdater1  FgsUpdater2  FgsUpdater3  FgsUpdater4  FgsUpdater5  FgsUpdater6  FgsUpdater7#g" $CATALINA_HOME/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/fedoragsearch.properties && \
     cp -vr /tmp/basic-solr-config/islandora_transforms $CATALINA_HOME/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms && \
     cp -v /tmp/basic-solr-config/foxmlToSolr.xslt $CATALINA_HOME/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/foxmlToSolr.xslt && \
