@@ -14,8 +14,8 @@ RUN GEN_DEP_PACKS="mysql-client \
 
 ## Set up environmental variables for Tomcat & dependencies installation
 # @see: Apache Maven http://maven.apache.org/download.cgi & Apache Ant https://ant.apache.org/
-ENV JAVA_MAX_MEM=${JAVA_MAX_MEM:-2G} \
-    JAVA_MIN_MEM=${JAVA_MIN_MEM:-512M} \
+ENV JAVA_MAX_MEM=${JAVA_MAX_MEM:-3G} \
+    JAVA_MIN_MEM=${JAVA_MIN_MEM:-1G} \
     JAVA_OPTS='-Djava.awt.headless=true -server -Xmx${JAVA_MAX_MEM} -Xms${JAVA_MIN_MEM} -XX:+UseG1GC -XX:+UseStringDeduplication -XX:MaxGCPauseMillis=200 -XX:InitiatingHeapOccupancyPercent=70 -Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses=true' \
     FEDORA_HOME=/usr/local/fedora \
     FEDORA_PATH=$PATH:/usr/local/fedora/server/bin:/usr/local/fedora/client/bin \
