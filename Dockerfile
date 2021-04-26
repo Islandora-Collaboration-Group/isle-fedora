@@ -24,6 +24,7 @@ ENV JAVA_MAX_MEM=${JAVA_MAX_MEM:-2G} \
     MAVEN_HOME=/opt/maven \
     ANT_HOME=/opt/ant \
     MAVEN_MAJOR=${MAVEN_MAJOR:-3} \
+    # Holding at version 3.6.3 due to breakage in mirrors & dependencies - 4/25/21
     MAVEN_VERSION=${MAVEN_VERSION:-3.6.3} \
     ANT_VERSION=${ANT_VERSION:-1.10.10}
 
