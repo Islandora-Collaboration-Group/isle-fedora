@@ -26,7 +26,8 @@ ENV JAVA_MAX_MEM=${JAVA_MAX_MEM:-3G} \
     MAVEN_MAJOR=${MAVEN_MAJOR:-3} \
     # Holding at version 3.6.3 due to breakage in mirrors & dependencies - 4/25/21
     MAVEN_VERSION=${MAVEN_VERSION:-3.6.3} \
-    ANT_VERSION=${ANT_VERSION:-1.10.10}
+    # Holding at version 1.10.9 due to breakage in mirrors & dependencies - 5/25/21
+    ANT_VERSION=${ANT_VERSION:-1.10.9}
 
 
 ## Copy installation configuration files.
